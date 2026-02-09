@@ -1,0 +1,57 @@
+/* src/styles.css */
+
+/* Move the centering logic here */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+  }
+  
+  /* Move the card design here */
+  .auth-card {
+    background: #ffffff;
+    /* Reduced padding from 2rem to 1.5rem */
+    padding: 1.5rem; 
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    /* Reduced max-width from 400px to 320px */
+    max-width: 320px; 
+  }
+  
+  /* Make the title a bit smaller to match the smaller card */
+  h2 {
+    margin: 0 0 0.4rem 0;
+    text-align: center;
+    font-size: 1.25rem; 
+    color: #0f172a;
+  }
+  
+  /* Reduce spacing in form groups to keep it compact */
+  .form-group {
+    margin-bottom: 0.8rem;
+  }
+  
+  input, .styled-select {
+    padding: 0.6rem; /* Slightly thinner inputs */
+  }
+  .toggle-link {
+    text-align: center;
+    margin-top: 1.2rem;
+    font-size: 0.85rem;
+    color: #64748b; /* This is the gray color for "Already have an account?" */
+  }
+  
+  /* This makes the actual link blue */
+  .toggle-link a {
+    color: #2563eb; /* A nice, vibrant blue */
+    text-decoration: none;
+    font-weight: 700; /* Makes it slightly bolder so it stands out */
+    transition: color 0.2s ease;
+  }
+  
+  .toggle-link a:hover {
+    color: #1d4ed8; /* Darker blue when hovering */
+    text-decoration: underline; /* Adds an underline on hover for clarity */
+  }

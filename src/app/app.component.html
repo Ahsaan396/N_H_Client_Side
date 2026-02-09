@@ -1,0 +1,10 @@
+<nav style="padding: 1rem; background: #f4f4f4; margin-bottom: 2rem;">
+  <a routerLink="/login" style="margin-right: 10px;">Login</a>
+  <a routerLink="/register" style="margin-right: 10px;">Register</a>
+  
+  <button (click)="logout()" style="float: right;">Logout</button>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,16 @@
+.styled-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 1rem;
+    color: #475569;
+    cursor: pointer;
+  }
+  
+  .styled-select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
