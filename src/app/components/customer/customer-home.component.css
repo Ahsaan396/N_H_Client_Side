@@ -1,0 +1,30 @@
+.store-wrapper {
+    padding: 2rem;
+}
+
+.hero {
+    text-align: center;
+    padding: 4rem 1rem;
+    background: #f8fafc;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+}
+
+.hero h1 {
+    color: #059669;
+    font-size: 2.5rem;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.product-placeholder {
+    border: 2px dashed #cbd5e1;
+    padding: 4rem;
+    text-align: center;
+    grid-column: span 4;
+    border-radius: 12px;
+}

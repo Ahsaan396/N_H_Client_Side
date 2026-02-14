@@ -8,7 +8,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AppRoutingModule } from './app-routing.module'; // Add this
-
+import { AdminDashboardComponent } from './components/admin/admin-dashboard.component'; // Add this
+import { CustomerHomeComponent } from './components/customer/customer-home.component'; // Add this
 // NgRx Imports
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -19,7 +20,10 @@ import { AuthEffects } from './store/auth/auth.effects';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminDashboardComponent,
+    CustomerHomeComponent
+
   ],
   imports: [
     BrowserModule,

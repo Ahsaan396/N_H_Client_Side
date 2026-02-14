@@ -1,0 +1,43 @@
+<div class="admin-container">
+    <aside class="stats-bar">
+      <div class="stat-box">
+        <span class="label">Total Products</span>
+        <span class="value">12</span>
+      </div>
+      <div class="stat-box">
+        <span class="label">Active Orders</span>
+        <span class="value">5</span>
+      </div>
+    </aside>
+  
+    <main class="admin-main">
+      <div class="header-actions">
+        <h2>Product Inventory</h2>
+        <button class="btn-add" (click)="toggleAddProduct()">+ Add New Product</button>
+      </div>
+  
+      <div class="inventory-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Organic Bamboo Straws</td>
+              <td>$12.00</td>
+              <td>Kitchen</td>
+              <td>
+                <button class="btn-edit">Edit</button>
+                <button class="btn-delete">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>

@@ -11,6 +11,7 @@ export class RegisterComponent {
   // Initialize the user object with default values
   user = {
     name: '',
+    username: '',
     email: '',
     password: '',
     role: 'user' // Default to customer
