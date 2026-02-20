@@ -6,9 +6,10 @@ import { AdminDashboardComponent } from './components/admin/admin-dashboard.comp
 import { CustomerHomeComponent } from './components/customer/customer-home.component';
 import { AdminDashboardComponent as AdminDashboardComponentAlias } from './components/admin/admin-dashboard.component';
 import { AdminGuard } from './guards/admin.guard';
+import { GuestGuard } from './guards/guest.guard';
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent , canActivate: [GuestGuard]},
+  { path: 'register', component: RegisterComponent, canActivate: [GuestGuard]},
   { 
     path: 'admin-dashboard', 
     component: AdminDashboardComponent, 
@@ -16,7 +17,8 @@ const routes: Routes = [
   },
   { 
     path: 'customer-home', 
-    component: CustomerHomeComponent 
+    component: CustomerHomeComponent ,
+    canActivate: [GuestGuard]
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];

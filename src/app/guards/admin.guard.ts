@@ -18,21 +18,16 @@ export class AdminGuard implements CanActivate {
 
 
   canActivate(): boolean {
-
-    // Add your admin authentication logic here
-
-    const isAdmin = true; // Replace with actual logic
-
-    if (!isAdmin) {
-
-      this.router.navigate(['/login']);
-
-      return false;
-
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
+  
+    if (token && role === 'admin') {
+      return true;
     }
-
-    return true;
-
+  
+    // Not an admin? Send back to login
+    this.router.navigate(['/login']);
+    return false;
   }
 
 }
