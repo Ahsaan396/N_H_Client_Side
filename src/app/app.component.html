@@ -1,9 +1,26 @@
-<nav style="padding: 1rem; background: #f4f4f4; margin-bottom: 2rem;">
-  <a routerLink="/login" style="margin-right: 10px;">Login</a>
-  <a routerLink="/register" style="margin-right: 10px;">Register</a>
-  
-  <button (click)="logout()" style="float: right;">Logout</button>
+
+<nav class="navbar">
+  <div class="logo" routerLink="/">EcoMarket</div>
+
+  <div class="nav-links">
+    <ng-container *ngIf="!(isLoggedIn$ | async)">
+      <a routerLink="/login" class="btn-flat">Login</a>
+      <a routerLink="/register" class="btn-primary">Register</a>
+    </ng-container>
+
+    <ng-container *ngIf="(isLoggedIn$ | async) && (isAdmin$ | async)">
+      <span class="badge">Admin Mode</span>
+      <button (click)="logout()" class="btn-logout">Logout</button>
+    </ng-container>
+
+    <ng-container *ngIf="(isLoggedIn$ | async) && !(isAdmin$ | async)">
+      <a routerLink="/customer-home" class="btn-flat">Market</a>
+      <button (click)="logout()" class="btn-logout">Logout</button>
+    </ng-container>
+  </div>
 </nav>
+
+<router-outlet></router-outlet>
 
 <div class="container">
   <router-outlet></router-outlet>

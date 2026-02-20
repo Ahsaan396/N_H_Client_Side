@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -10,37 +10,26 @@ import * as AuthActions from './store/auth/auth.action';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  // Observable to track if user is logged in
+export class AppComponent {
   isLoggedIn$: Observable<boolean>;
+  isAdmin$: Observable<boolean>;
 
   constructor(private store: Store<any>, private router: Router) {
-    // We check if 'token' exists in the auth state
+    // Check if user is logged in (token exists)
     this.isLoggedIn$ = this.store.pipe(
-      select(state => state.auth.token),
-      map(token => !!token)
+      select(state => !!state.auth.token)
+    );
+
+    // Check if the role is specifically 'admin'
+    this.isAdmin$ = this.store.pipe(
+      select(state => state.auth.user?.role === 'admin')
     );
   }
 
-  ngOnInit() {
-    // Check localStorage on refresh to restore state if needed
-    const token = localStorage.getItem('token');
-    if (token) {
-      // You could dispatch a 'rehydrate' action here if needed
-    }
-  }
-
   logout() {
-    // 1. Clear LocalStorage (The physical data)
     localStorage.removeItem('token');
-    localStorage.removeItem('user');
-
-    // 2. Clear Store State (The memory data)
+    localStorage.removeItem('role');
     this.store.dispatch(AuthActions.logout());
-
-    // 3. Redirect (The user experience)
     this.router.navigate(['/login']);
-    
-    console.log('User logged out of EcoMarket');
   }
 }

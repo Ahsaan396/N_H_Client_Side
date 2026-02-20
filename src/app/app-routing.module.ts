@@ -18,7 +18,7 @@ const routes: Routes = [
   { 
     path: 'customer-home', 
     component: CustomerHomeComponent ,
-    canActivate: [GuestGuard]
+    
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
