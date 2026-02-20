@@ -1,43 +1,53 @@
 <div class="admin-container">
-    <aside class="stats-bar">
-      <div class="stat-box">
-        <span class="label">Total Products</span>
-        <span class="value">12</span>
-      </div>
-      <div class="stat-box">
-        <span class="label">Active Orders</span>
-        <span class="value">5</span>
-      </div>
-    </aside>
-  
-    <main class="admin-main">
-      <div class="header-actions">
-        <h2>Product Inventory</h2>
-        <button class="btn-add" (click)="toggleAddProduct()">+ Add New Product</button>
-      </div>
-  
-      <div class="inventory-table">
-        <table>
-          <thead>
-            <tr>
-              <th>Product Name</th>
-              <th>Price</th>
-              <th>Category</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Organic Bamboo Straws</td>
-              <td>$12.00</td>
-              <td>Kitchen</td>
-              <td>
-                <button class="btn-edit">Edit</button>
-                <button class="btn-delete">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </main>
+  <div class="header">
+    <h1>Inventory Control</h1>
+    <button (click)="toggleForm()" class="btn-main">
+      {{ showForm ? 'Close' : '+ Add Product' }}
+    </button>
   </div>
+  <div class="inventory-table" *ngIf="!showForm">
+    <div *ngIf="products.length === 0" class="no-data">
+      <p>No products found. Click "+ Add Product" to create your first one!</p>
+    </div>
+  
+    <table *ngIf="products.length > 0">
+      <tr *ngFor="let item of products">
+         <td>{{ item.name }}</td>
+         </tr>
+    </table>
+  </div>
+  <div *ngIf="showForm" class="form-overlay">
+    <div class="form-card">
+      <h3>{{ isEditMode ? 'Update Product' : 'Add New Product' }}</h3>
+      <form (ngSubmit)="onSubmit()">
+        <input [(ngModel)]="product.name" name="name" placeholder="Name">
+        <input type="number" [(ngModel)]="product.price" name="price" placeholder="Price">
+        <input [(ngModel)]="product.category" name="category" placeholder="Category">
+        <textarea [(ngModel)]="product.description" name="description" placeholder="Description"></textarea>
+        <button type="submit" class="btn-save">{{ isEditMode ? 'Update' : 'Save' }}</button>
+      </form>
+    </div>
+  </div>
+
+  <table *ngIf="!showForm">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of products">
+        <td>{{ item.name }}</td>
+        <td>{{ item.price | currency }}</td>
+        <td>{{ item.category }}</td>
+        <td>
+          <button (click)="onEdit(item)" class="edit-text">Edit</button>
+          <button (click)="onDelete(item._id)" class="delete-text">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
