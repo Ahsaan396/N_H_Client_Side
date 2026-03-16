@@ -1,0 +1,15 @@
+<div class="container">
+    <h2>Our Products</h2>
+  
+    <p *ngIf="loading">Loading products...</p>
+  
+    <div class="product-grid" *ngIf="!loading">
+      <div class="product-card" *ngFor="let product of products">
+        <h3>{{ product.name }}</h3>
+        <p><strong>Category:</strong> {{ product.category }}</p>
+        <p><strong>Description:</strong> {{ product.description }}</p>
+        <p class="price">৳ {{ product.price }}</p>
+        <p><strong>Stock:</strong> {{ product.stock }}</p>
+      </div>
+    </div>
+  </div>

@@ -2,30 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 
 @Component({
-  selector: 'app-customer-home',
-  templateUrl: './customer-home.component.html',
-  styleUrls: ['./customer-home.component.css']
+  selector: 'app-products',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.css']
 })
-export class CustomerHomeComponent implements OnInit {
+export class ProductsComponent implements OnInit {
   products: any[] = [];
   loading = true;
 
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.loadMarketplace();
-  }
-
-  loadMarketplace() {
     this.productService.getProducts().subscribe({
       next: (data) => {
         this.products = data;
         this.loading = false;
       },
-      error: (err) => {
-        console.error('Failed to load products', err);
-        this.loading = false;
-      }
+      error: () => this.loading = false
     });
   }
 }

@@ -1,30 +1,64 @@
-.store-wrapper {
-    padding: 2rem;
+.marketplace-container {
+    padding: 40px;
+    background-color: #f9fbfa;
+    min-height: 100vh;
 }
 
-.hero {
+.market-header {
     text-align: center;
-    padding: 4rem 1rem;
-    background: #f8fafc;
-    border-radius: 20px;
-    margin-bottom: 2rem;
-}
-
-.hero h1 {
-    color: #059669;
-    font-size: 2.5rem;
+    margin-bottom: 40px;
 }
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
 }
 
-.product-placeholder {
-    border: 2px dashed #cbd5e1;
-    padding: 4rem;
-    text-align: center;
-    grid-column: span 4;
-    border-radius: 12px;
+.product-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.category-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #059669;
+}
+
+.btn-buy {
+    background: #1e293b;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
 }

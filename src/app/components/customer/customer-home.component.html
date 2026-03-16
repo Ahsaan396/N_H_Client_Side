@@ -1,0 +1,29 @@
+<div class="marketplace-container">
+    <header class="market-header">
+      <h1>EcoMarket Catalog</h1>
+      <p>Discover sustainable products added by our curators.</p>
+    </header>
+  
+    <div *ngIf="loading" class="loader">Updating inventory...</div>
+  
+    <div class="product-grid" *ngIf="!loading">
+      <div class="product-card" *ngFor="let item of products">
+        <div class="product-image">
+          <img [src]="item.imageUrl || 'https://via.placeholder.com/150'" alt="Product">
+          <span class="category-badge">{{ item.category }}</span>
+        </div>
+        <div class="product-info">
+          <h3>{{ item.name }}</h3>
+          <p class="description">{{ item.description }}</p>
+          <div class="footer">
+            <span class="price">{{ item.price | currency }}</span>
+            <button class="btn-buy">View Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="products.length === 0 && !loading" class="empty-state">
+      <p>No products available right now. Check back soon!</p>
+    </div>
+  </div>
