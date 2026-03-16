@@ -1,53 +1,80 @@
 <div class="admin-container">
   <div class="header">
     <h1>Inventory Control</h1>
+    
+    <div class="search-container" *ngIf="!showForm">
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm" 
+        placeholder="🔍 Search by category..."
+        class="search-input"
+      />
+    </div>
     <button (click)="toggleForm()" class="btn-main">
-      {{ showForm ? 'Close' : '+ Add Product' }}
+      {{ showForm ? '← Back to List' : '+ Add Product' }}
     </button>
   </div>
-  <div class="inventory-table" *ngIf="!showForm">
-    <div *ngIf="products.length === 0" class="no-data">
-      <p>No products found. Click "+ Add Product" to create your first one!</p>
-    </div>
-  
-    <table *ngIf="products.length > 0">
-      <tr *ngFor="let item of products">
-         <td>{{ item.name }}</td>
-         </tr>
-    </table>
-  </div>
-  <div *ngIf="showForm" class="form-overlay">
+
+  <div class="form-wrapper" *ngIf="showForm">
     <div class="form-card">
-      <h3>{{ isEditMode ? 'Update Product' : 'Add New Product' }}</h3>
-      <form (ngSubmit)="onSubmit()">
-        <input [(ngModel)]="product.name" name="name" placeholder="Name">
-        <input type="number" [(ngModel)]="product.price" name="price" placeholder="Price">
-        <input [(ngModel)]="product.category" name="category" placeholder="Category">
-        <textarea [(ngModel)]="product.description" name="description" placeholder="Description"></textarea>
-        <button type="submit" class="btn-save">{{ isEditMode ? 'Update' : 'Save' }}</button>
+      <h2>{{ isEditMode ? 'Edit Product' : 'Add New Product' }}</h2>
+      <form (ngSubmit)="onSubmit()" #productForm="ngForm">
+        <div class="form-group">
+          <label>Product Name</label>
+          <input type="text" [(ngModel)]="product.name" name="name" required placeholder="Enter name">
+        </div>
+
+        <div class="form-group">
+          <label>Price</label>
+          <input type="number" [(ngModel)]="product.price" name="price" required placeholder="0.00">
+        </div>
+
+        <div class="form-group">
+          <label>Category</label>
+          <input type="text" [(ngModel)]="product.category" name="category" required placeholder="e.g. Kitchen">
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+          <textarea [(ngModel)]="product.description" name="description" placeholder="Briefly describe the product"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-save" [disabled]="!productForm.valid">
+            {{ isEditMode ? 'Update Product' : 'Save Product' }}
+          </button>
+          <button type="button" (click)="toggleForm()" class="btn-cancel">Cancel</button>
+        </div>
       </form>
     </div>
   </div>
 
-  <table *ngIf="!showForm">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Category</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of products">
-        <td>{{ item.name }}</td>
-        <td>{{ item.price | currency }}</td>
-        <td>{{ item.category }}</td>
-        <td>
-          <button (click)="onEdit(item)" class="edit-text">Edit</button>
-          <button (click)="onDelete(item._id)" class="delete-text">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-wrapper" *ngIf="!showForm">
+    <table *ngIf="filteredProducts.length > 0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of filteredProducts">
+          <td>{{ item.name }}</td>
+          <td>{{ item.price | currency }}</td>
+          <td><span class="cat-tag">{{ item.category }}</span></td>
+          <td>
+            <button (click)="onEdit(item)" class="edit-text">Edit</button>
+            <button (click)="onDelete(item._id)" class="delete-text">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="filteredProducts.length === 0" class="no-results">
+      <p *ngIf="searchTerm">No products found in "{{ searchTerm }}"</p>
+      <p *ngIf="!searchTerm">Your inventory is empty. Click "+ Add Product" to start.</p>
+    </div>
+  </div>
 </div>

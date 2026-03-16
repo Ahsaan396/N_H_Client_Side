@@ -1,53 +1,150 @@
-.admin-container {
-    padding: 40px;
-}
-
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    gap: 20px; 
+    flex-wrap: wrap; 
 }
 
-table {
-    width: 100%;
-    background: white;
+.header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    white-space: nowrap; 
+    flex-shrink: 0; 
+}
+
+.search-container {
+    flex: 2; 
+    max-width: 500px;
+    min-width: 200px; 
+}
+
+.btn-main {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 20px;
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border-collapse: collapse;
-}
-
-th,
-td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-}
-
-.edit-text {
-    color: #2563eb;
-    background: none;
-    border: none;
+    font-weight: 600;
     cursor: pointer;
-    font-weight: bold;
+    white-space: nowrap; 
+    flex-shrink: 0;
+    transition: background 0.3s;
 }
 
-.delete-text {
-    color: #dc2626;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    margin-left: 10px;
+.btn-main:hover {
+    background-color: #1d4ed8;
 }
 
-.form-card input,
-.form-card textarea {
+.btn-main:contains('Back') {
+    background-color: #64748b;
+}
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.form-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    max-width: 500px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-save {
+    background: #059669;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.btn-cancel {
+    background: #f1f5f9;
+    color: #475569;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+/* This creates the dim background and centers the card */
+.form-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dim the background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(2px); /* Optional: slight blur for modern look */
+}
+
+.form-card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
     display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 5px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.btn-save {
+    flex: 2;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    flex: 1;
+    background: #f1f5f9;
+    color: #475569;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
 }

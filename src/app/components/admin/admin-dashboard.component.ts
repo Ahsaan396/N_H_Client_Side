@@ -11,6 +11,7 @@ export class AdminDashboardComponent implements OnInit {
   showForm = false;
   isEditMode = false;
   currentProductId: string | null = null;
+  searchTerm: string = '';
   
   product = { name: '', price: 0, category: '', description: '', stock: 0 };
 
@@ -27,6 +28,11 @@ export class AdminDashboardComponent implements OnInit {
       },
       error: (err) => console.error('Could not load products:', err)
     });
+  }
+  get filteredProducts() {
+    return this.products.filter(product => 
+      product.category.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 
   toggleForm() {
