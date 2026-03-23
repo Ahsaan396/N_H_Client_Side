@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -15,7 +16,7 @@ export class AdminDashboardComponent implements OnInit {
   
   product = { name: '', price: 0, category: '', description: '', stock: 0 };
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService,private notify: NotificationService) {}
 
   ngOnInit() {
     this.loadProducts(); // This fills the 'products' array on start
@@ -60,21 +61,33 @@ export class AdminDashboardComponent implements OnInit {
       this.productService.updateProduct(this.currentProductId, this.product).subscribe({
         next: (res) => {
           console.log('Update Success:', res);
-          this.loadProducts(); // Refresh the list
-          this.toggleForm();   // Close the form
+          this.loadProducts(); 
+          this.toggleForm();   
+          
+          // --- ADDED NOTIFICATION ---
+          this.notify.show('✅ Product updated successfully!');
         },
-        error: (err) => console.error('Update Failed:', err)
+        error: (err) => {
+          console.error('Update Failed:', err);
+          this.notify.show('❌ Failed to update product');
+        }
       });
     } else {
       // CREATE
       this.productService.addProduct(this.product).subscribe({
         next: (res) => {
           console.log('Create Success:', res);
-          this.loadProducts(); // Refresh the list instantly
-          this.toggleForm();   // Close the form
-          this.resetForm();    // Clear the fields
+          this.loadProducts(); 
+          this.toggleForm();   
+          this.resetForm();    
+          
+          // --- ADDED NOTIFICATION ---
+          this.notify.show('🚀 Product added successfully!');
         },
-        error: (err) => console.error('Create Failed:', err)
+        error: (err) => {
+          console.error('Create Failed:', err);
+          this.notify.show('❌ Failed to add product');
+        }
       });
     }
   }

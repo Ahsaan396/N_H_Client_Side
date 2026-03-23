@@ -78,3 +78,31 @@
     background: #dc2626;
     color: white;
   }
+  .toast-notification {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #10b981; /* Nice emerald green */
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    font-weight: 600;
+    z-index: 9999; /* Ensure it stays above everything */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: toast-in 0.4s ease-out;
+  }
+  
+  /* Animation to slide in from the right */
+  @keyframes toast-in {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
