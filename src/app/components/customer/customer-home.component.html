@@ -17,7 +17,9 @@
           <p class="description">{{ item.description }}</p>
           <div class="footer">
             <span class="price">{{ item.price | currency }}</span>
-            <button class="btn-buy">View Details</button>
+            <button (click)="onAddToCart(item)" class="btn-buy">
+              Add to Cart
+            </button>
           </div>
         </div>
       </div>

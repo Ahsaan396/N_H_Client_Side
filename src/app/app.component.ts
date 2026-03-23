@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs'; // Added Subscription
 import * as AuthActions from './store/auth/auth.action';
 import { NotificationService } from './services/notification.service'; // Import your new service
+import { CartService } from './services/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +18,13 @@ export class AppComponent implements OnInit, OnDestroy {
   // Notification properties
   message: string | null = null;
   private notifySub!: Subscription; // This holds the "link" to the service
+  cartCount: number = 0; // Property to store the cart count
 
   constructor(
     private store: Store<any>, 
     private router: Router,
-    private notify: NotificationService // Inject the Notification Service
+    private notify: NotificationService,
+    private cartService: CartService, 
   ) {
     this.isLoggedIn$ = this.store.pipe(
       select(state => !!state.auth.token)
@@ -32,15 +35,13 @@ export class AppComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnInit(): void {
- 
-    this.notifySub = this.notify.message$.subscribe((msg: string) => { 
-      this.message = msg;
-      
-  
-      setTimeout(() => {
-        this.message = null;
-      }, 3000);
+  ngOnInit() {
+    this.isLoggedIn$.subscribe(loggedIn => {
+      if (loggedIn) {
+        this.cartService.loadCart(); // Fetch from DB
+      } else {
+        this.cartService.clearCartOnLogout(); // Clear UI only
+      }
     });
   }
   logout() {

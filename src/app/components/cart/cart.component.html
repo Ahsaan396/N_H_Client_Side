@@ -1,0 +1,26 @@
+<div class="cart-container">
+    <h2>Your Shopping Cart</h2>
+  
+    <div *ngIf="items.length === 0" class="empty-cart">
+      <p>Your cart is empty.</p>
+      <button routerLink="/customer-home">Go Shopping</button>
+    </div>
+  
+    <div *ngIf="items.length > 0" class="cart-content">
+      <div class="cart-item" *ngFor="let item of items">
+        <img [src]="item.productId?.imageUrl || 'assets/placeholder.png'" width="80">
+        
+        <div class="item-details">
+          <h4>{{ item.productId?.name }}</h4>
+          <p>{{ item.productId?.price | currency }} x {{ item.quantity }}</p>
+        </div>
+        
+        <button class="btn-remove" (click)="removeItem(item.productId?._id)">Remove</button>
+      </div>
+  
+      <div class="cart-summary">
+        <h3>Total: {{ total | currency }}</h3>
+        <button class="btn-checkout" (click)="checkout()">Checkout Now</button>
+      </div>
+    </div>
+  </div>

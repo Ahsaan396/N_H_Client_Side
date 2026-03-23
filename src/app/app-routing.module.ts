@@ -7,6 +7,7 @@ import { CustomerHomeComponent } from './components/customer/customer-home.compo
 import { AdminDashboardComponent as AdminDashboardComponentAlias } from './components/admin/admin-dashboard.component';
 import { AdminGuard } from './guards/admin.guard';
 import { GuestGuard } from './guards/guest.guard';
+import { CartComponent } from './components/cart/cart.component';
 
 import { ProductsComponent } from './components/customer-product/product.component';
 
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'login', component: LoginComponent , canActivate: [GuestGuard]},
   { path: 'register', component: RegisterComponent, canActivate: [GuestGuard]},
+  { path: 'cart', component: CartComponent },
   { 
     path: 'admin-dashboard', 
     component: AdminDashboardComponent, 

@@ -15,6 +15,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { authReducer } from './store/auth/auth.reducer';
 import { AuthEffects } from './store/auth/auth.effects';
+import { CartComponent } from './components/cart/cart.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { AuthEffects } from './store/auth/auth.effects';
     LoginComponent,
     RegisterComponent,
     AdminDashboardComponent,
-    CustomerHomeComponent
+    CustomerHomeComponent,
+    CartComponent,
 
   ],
   imports: [
@@ -32,7 +35,8 @@ import { AuthEffects } from './store/auth/auth.effects';
     AppRoutingModule,    // MUST BE HERE
     RouterModule,        // MUST BE HERE
     StoreModule.forRoot({ auth: authReducer }),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects]),
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

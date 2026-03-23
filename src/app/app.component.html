@@ -6,6 +6,10 @@
     <ng-container *ngIf="!(isLoggedIn$ | async)">
       <a routerLink="/login" class="btn-flat">Login</a>
       <a routerLink="/register" class="btn-primary">Register</a>
+      <a routerLink="/cart" class="cart-link">
+        🛒 Cart 
+        <span *ngIf="cartCount > 0" class="cart-badge">{{ cartCount }}</span>
+      </a>
     </ng-container>
 
     <ng-container *ngIf="(isLoggedIn$ | async) && (isAdmin$ | async)">
